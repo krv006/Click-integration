@@ -43,18 +43,18 @@ class OrderCreate(views.APIView):
 
         return response.Response(result)
 
-
 def build_click_sign(data: dict) -> str:
     click_trans_id = str(data.get("click_trans_id", "")).strip()
     service_id = str(data.get("service_id", "")).strip()
-    secret_key = str(settings.CLICK_SECRET_KEY).strip()
     merchant_trans_id = str(data.get("merchant_trans_id", "")).strip()
+    amount = str(data.get("amount", "0")).strip()
+    action = str(data.get("action", "0")).strip()
+    sign_time = str(data.get("sign_time", "")).strip()
+    secret_key = str(settings.CLICK_SECRET_KEY).strip()
 
-    raw_amount = data.get("merchant_trans_amount") or data.get("amount") or "0"
-    amount_str = str(raw_amount).strip()
-
-    sign_source = click_trans_id + service_id + secret_key + merchant_trans_id + amount_str
+    sign_source = click_trans_id + service_id + merchant_trans_id + amount + action + sign_time + secret_key
     return hashlib.md5(sign_source.encode()).hexdigest().lower()
+
 
 
 def validate_click_request(data):

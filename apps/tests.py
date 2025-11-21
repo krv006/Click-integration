@@ -1,9 +1,9 @@
 import hashlib
 
-click_trans_id = "4"
+click_trans_id = "5"
 service_id = "80756"
 secret_key = "ALW593cHXtux"
-merchant_trans_id = "4"
+merchant_trans_id = "5"
 amount = "1000"
 
 sign_source = click_trans_id + service_id + secret_key + merchant_trans_id + amount
