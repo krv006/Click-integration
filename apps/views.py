@@ -42,7 +42,6 @@ class OrderCreate(views.APIView):
             result["payment_link"] = payment_link
 
         return response.Response(result)
-
 def build_click_sign(data: dict) -> str:
     click_trans_id = str(data.get("click_trans_id", "")).strip()
     service_id = str(data.get("service_id", "")).strip()
@@ -52,9 +51,17 @@ def build_click_sign(data: dict) -> str:
     sign_time = str(data.get("sign_time", "")).strip()
     secret_key = str(settings.CLICK_SECRET_KEY).strip()
 
-    sign_source = click_trans_id + service_id + merchant_trans_id + amount + action + sign_time + secret_key
-    return hashlib.md5(sign_source.encode()).hexdigest().lower()
+    sign_source = (
+        click_trans_id
+        + service_id
+        + secret_key
+        + merchant_trans_id
+        + amount
+        + action
+        + sign_time
+    )
 
+    return hashlib.md5(sign_source.encode()).hexdigest().lower()
 
 
 def validate_click_request(data):

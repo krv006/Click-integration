@@ -1,6 +1,6 @@
 import hashlib
 
-click_trans_id = "5"
+click_trans_id = "3376634945"
 service_id = "80756"
 secret_key = "ALW593cHXtux"
 merchant_trans_id = "5"
