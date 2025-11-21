@@ -55,7 +55,6 @@ def build_click_sign(data: dict) -> str:
     secret_key = str(settings.CLICK_SECRET_KEY).strip()
 
     if action == "0":
-        # PREPARE
         sign_source = (
             click_trans_id
             + service_id
@@ -66,7 +65,6 @@ def build_click_sign(data: dict) -> str:
             + sign_time
         )
     elif action == "1":
-        # COMPLETE
         sign_source = (
             click_trans_id
             + service_id
@@ -88,7 +86,7 @@ def build_click_sign(data: dict) -> str:
             + sign_time
         )
 
-    print("sign_source:", sign_source)  # debug qolsa ham foydali
+    print("sign_source:", sign_source)
     return hashlib.md5(sign_source.encode()).hexdigest().lower()
 
 
