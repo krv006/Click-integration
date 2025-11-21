@@ -51,9 +51,12 @@ def build_click_sign(data: dict) -> str:
     amount = str(data.get("amount", "0")).strip()
     action = str(data.get("action", "0")).strip()
     sign_time = str(data.get("sign_time", "")).strip()
+    merchant_prepare_id = str(data.get("merchant_prepare_id", "")).strip()
     secret_key = str(settings.CLICK_SECRET_KEY).strip()
 
-    sign_source = (
+    if action == "0":
+        # PREPARE
+        sign_source = (
             click_trans_id
             + service_id
             + secret_key
@@ -61,9 +64,33 @@ def build_click_sign(data: dict) -> str:
             + amount
             + action
             + sign_time
-    )
+        )
+    elif action == "1":
+        # COMPLETE
+        sign_source = (
+            click_trans_id
+            + service_id
+            + secret_key
+            + merchant_trans_id
+            + merchant_prepare_id
+            + amount
+            + action
+            + sign_time
+        )
+    else:
+        sign_source = (
+            click_trans_id
+            + service_id
+            + secret_key
+            + merchant_trans_id
+            + amount
+            + action
+            + sign_time
+        )
 
+    print("sign_source:", sign_source)  # debug qolsa ham foydali
     return hashlib.md5(sign_source.encode()).hexdigest().lower()
+
 
 
 def validate_click_request(data):
