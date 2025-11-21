@@ -1,0 +1,68 @@
+nginx:
+
+
+server {
+    listen 8012;
+    server_name api.tema2.sector-soft.ruapi.tema2.sector-soft.ru www.api.tema2.sector-soft.ru.;
+
+    client_max_body_size 100M;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/var/www/click/click.sock:;
+    }
+
+    location = /api/v1/webhook/click/prepare {
+        proxy_pass https://unleased-maddison-goodish.ngrok-free.dev;
+        proxy_set_header Host unleased-maddison-goodish.ngrok-free.dev;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_ssl_server_name on;
+    }
+
+    location = /api/v1/webhook/click/complete {
+        proxy_pass https://unleased-maddison-goodish.ngrok-free.dev;
+        proxy_set_header Host unleased-maddison-goodish.ngrok-free.dev;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_ssl_server_name on;
+    }
+}
+
+
+
+    server_name api.tema2.sector-soft.ru www.api.tema2.sector-soft.ru;
+
+server {
+    server_name kamron.uz;
+
+
+    client_max_body_size 100M;
+
+
+
+
+    location = /api/v1/webhook/click/prepare {
+        proxy_pass https://unleased-maddison-goodish.ngrok-free.dev;
+        proxy_set_header Host unleased-maddison-goodish.ngrok-free.dev;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+
+        proxy_ssl_server_name on;
+    }
+
+    location = /api/v1/webhook/click/complete {
+        proxy_pass https://unleased-maddison-goodish.ngrok-free.dev;
+        proxy_set_header Host unleased-maddison-goodish.ngrok-free.dev;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+
+        proxy_ssl_server_name on;
+    }
+

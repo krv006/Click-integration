@@ -1,2 +1,18 @@
 
-docker exec -it 86cdaff3086e79a5f40146a575fb45dedef30d6a9853b2438e91957c556bad6b psql -U postgres
+Docker
+docker exec -it 629b5a104235 psql -U postgres
+
+server ssh
+
+ls ~/.ssh
+
+ssh-keygen -t ed25519 -C "your_email@example.com"
+
+cat ~/.ssh/id_ed25519.pub
+
+
+service
+
+
+
+docker run --name postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=1 -p 5433:5432 -d postgres:latest

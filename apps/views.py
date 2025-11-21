@@ -98,7 +98,7 @@ class ClickPrepareView(APIView):
 
     def post(self, request):
         data = request.data
-
+        print(data)
         # validate_click_request -> service_id, sign, order, amount tekshiradi
         order, error_response = validate_click_request(data)
         if error_response:
@@ -106,13 +106,15 @@ class ClickPrepareView(APIView):
 
         merchant_trans_id = str(order.id)
 
-        return Response({
+        res = {
             "click_trans_id": data.get("click_trans_id"),
             "merchant_trans_id": merchant_trans_id,
             "merchant_prepare_id": merchant_trans_id,
             "error": 0,
             "error_note": "PREPARE_OK",
-        })
+        }
+
+        return Response(res)
 
 
 @method_decorator(csrf_exempt, name="dispatch")
