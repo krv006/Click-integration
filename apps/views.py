@@ -54,7 +54,7 @@ def build_click_sign(data: dict) -> str:
     amount_str = str(raw_amount).strip()
 
     sign_source = click_trans_id + service_id + secret_key + merchant_trans_id + amount_str
-    return hashlib.md5(sign_source.encode("utf-8")).hexdigest().lower()
+    return hashlib.md5(sign_source.encode()).hexdigest().lower()
 
 
 def validate_click_request(data):
