@@ -23,3 +23,7 @@ C:\ngrok\ngrok.exe config add-authtoken 35b0PBIOI7LEYwE7BzTBENCrIdr_9bvYFWEGDF63
         "payment_method": "click"
     },
     "payment_link": "https://my.click.uz/services/pay?service_id=adadadas&merchant_id=asdadad&amount=2006&transaction_param=2&return_url=https://xpresstransportation.org/"
+
+
+Proekt run qilish -> boshida django run
+kein esa -> ngrok
