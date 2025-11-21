@@ -1,0 +1,2 @@
+
+docker exec -it 86cdaff3086e79a5f40146a575fb45dedef30d6a9853b2438e91957c556bad6b psql -U postgres

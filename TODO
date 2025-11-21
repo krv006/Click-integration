@@ -1,0 +1,25 @@
+C:\ngrok\ngrok.exe config add-authtoken 35b0PBIOI7LEYwE7BzTBENCrIdr_9bvYFWEGDF63MtJjicZv
+
+
+ https://4ed248aae111.ngrok-free.app
+
+
+{
+    "costumer_name": "Akbarov Akmaljon",
+    "address": "Farg'ona shahar",
+    "total_cost": 1000,
+    "payment_method": "click"
+}
+
+
+
+
+{
+    "order": {
+        "id": 2,
+        "costumer_name": "Rustamov Kamron",
+        "address": "Guliston",
+        "total_cost": 2006,
+        "payment_method": "click"
+    },
+    "payment_link": "https://my.click.uz/services/pay?service_id=adadadas&merchant_id=asdadad&amount=2006&transaction_param=2&return_url=https://xpresstransportation.org/"
