@@ -42,6 +42,8 @@ class OrderCreate(views.APIView):
             result["payment_link"] = payment_link
 
         return response.Response(result)
+
+
 def build_click_sign(data: dict) -> str:
     click_trans_id = str(data.get("click_trans_id", "")).strip()
     service_id = str(data.get("service_id", "")).strip()
@@ -52,13 +54,13 @@ def build_click_sign(data: dict) -> str:
     secret_key = str(settings.CLICK_SECRET_KEY).strip()
 
     sign_source = (
-        click_trans_id
-        + service_id
-        + secret_key
-        + merchant_trans_id
-        + amount
-        + action
-        + sign_time
+            click_trans_id
+            + service_id
+            + secret_key
+            + merchant_trans_id
+            + amount
+            + action
+            + sign_time
     )
 
     return hashlib.md5(sign_source.encode()).hexdigest().lower()
@@ -74,6 +76,19 @@ def validate_click_request(data):
         return None, Response({"error": -1, "error_note": "SIGN_REQUIRED"})
 
     expected_sign = build_click_sign(data).lower()
+
+    print("expected_sign:", expected_sign)
+    print("received_sign:", received_sign)
+    print("sign_source:", (
+            str(data.get("click_trans_id", "")).strip()
+            + str(data.get("service_id", "")).strip()
+            + str(settings.CLICK_SECRET_KEY).strip()
+            + str(data.get("merchant_trans_id", "")).strip()
+            + str(data.get("amount", "0")).strip()
+            + str(data.get("action", "0")).strip()
+            + str(data.get("sign_time", "")).strip()
+    ))
+
     if expected_sign != received_sign:
         return None, Response({"error": -1, "error_note": "SIGN_CHECK_FAILED"})
 
@@ -123,7 +138,7 @@ class ClickPrepareView(APIView):
             "error_note": "PREPARE_OK",
         }
 
-        print("Response: ",res)
+        print("Response: ", res)
 
         return Response(res)
 
