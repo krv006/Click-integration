@@ -103,7 +103,7 @@ class ClickPrepareView(APIView):
         order, error_response = validate_click_request(data)
 
         if error_response:
-            print(error_response)
+            print(error_response.data)
             return error_response
 
         merchant_trans_id = str(order.id)
