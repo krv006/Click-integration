@@ -98,7 +98,7 @@ class ClickPrepareView(APIView):
 
     def post(self, request):
         data = request.data
-        print(data)
+        print("Request: ", data)
         # validate_click_request -> service_id, sign, order, amount tekshiradi
         order, error_response = validate_click_request(data)
         if error_response:
@@ -113,6 +113,8 @@ class ClickPrepareView(APIView):
             "error": 0,
             "error_note": "PREPARE_OK",
         }
+
+        print("Response: ",res)
 
         return Response(res)
 
